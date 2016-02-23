@@ -1,0 +1,6 @@
+<div class="row">
+  <div ng-repeat="server in servers" class="col-sm-6 col-md-4" ui-sref="detail({id: home.id})">
+        <h3>{{server.name}}</h3>
+        <p>{{server.responseTime * 1000}} ms</p>
+  </div>
+</div>
