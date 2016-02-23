@@ -1,5 +1,6 @@
 <div class="home-detail">
-  <p>Name: {{server.name}}</p>
+  <p ng-style="server.responseTime*1000<=50 ? {color: 'green'}: server.responseTime*1000<=500 ?
+  {color: 'yellow'} : {color:'red'}">Name: {{server.name}}</p>
   <p>Response Time: {{server.responseTime * 1000}}</p>
   <p>OS: {{server.os}}</p>
   <p>Memory: {{server.memory}}</p>
