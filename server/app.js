@@ -11,6 +11,6 @@ var io = Socket(server)
 
 app.use(Express.static("./client"))
 
-server.listen(8080, function () {
+server.listen(process.env.PORT || 8080, function () {
   console.log("listening on 8080")
 })
