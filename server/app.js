@@ -12,5 +12,9 @@ var io = Socket(server)
 app.use(Express.static("./client"))
 
 server.listen(process.env.PORT || 8080, function () {
-  console.log("listening on 8080")
+  if (process.env.PORT) {
+    console.log("listening on: ", process.env.PORT);
+  } else {
+    console.log("listening on port 8080");
+  }
 })
