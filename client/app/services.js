@@ -11,8 +11,8 @@ function ServerStatusService($http) {
         .then((response) => response.data);
     },
     getServer: function (id) {
-      // return this.getServers()
-      //   .then((homes) => homes.find((home) => parseInt(home.id) === parseInt(id)))
+      return this.getServers()
+        .then((servers) => servers.find((server) => parseInt(server.id) === parseInt(id)))
     }
   }
 }
