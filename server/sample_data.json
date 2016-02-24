@@ -19,3 +19,30 @@
        memory: '2EB',
        cpu: 'Force t5',
        temp: '87C' } ]
+
+
+       collection.aggregate([
+         {$match: {}},
+         {$group: {_id: "$id", avgRT: {$avg: "$responseTime"}}}
+       ]).toArray(function(err, docs){
+         console.log(docs);
+         docs.forEach(function(server){
+           serverIndex[server._id]= {id: server._id, average: server.avgRT};
+         })
+         console.log(serverIndex);
+       })
+
+       // for (var i = 0; i < servers.length; i++) {
+       //   var id = servers[i].id;
+       //   if (!serverIndex[id]) {
+       //     serverIndex[id] = {id: id, responseTimes: [], average: 0 }
+       //   }
+       //   serverIndex[id].responseTimes.push(servers[i].responseTime);
+       //   var sum = 0;
+       //   var numberOfResponseTimes = serverIndex[id].responseTimes.length;
+       //   for (var j = 0 ; j < numberOfResponseTimes; j++) {
+       //     sum += serverIndex[id].responseTimes[j]
+       //   }
+       //   serverIndex[id].average = sum/numberOfResponseTimes*1000;
+       // }
+       // console.log(serverIndex);

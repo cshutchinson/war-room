@@ -3,5 +3,6 @@
         <h3 ng-style="server.responseTime*1000<=50 ? {color: 'green'}: server.responseTime*1000<=500 ?
         {color: 'yellow'} : {color:'red'}">{{server.name}}</h3>
         <p>{{server.responseTime * 1000}} ms</p>
+        <p>Average Response Time: {{averages[server.id].average}}</p>
   </div>
 </div>
