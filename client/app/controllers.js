@@ -11,6 +11,7 @@ function ServerController($scope, ServerStatusService, TimeService) {
       $scope.servers = servers;
     });
   TimeService.on(function (data) {
+    $scope.body = data.body;
     $scope.averages = data.averages
     $scope.$apply()
   })

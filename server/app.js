@@ -38,32 +38,48 @@ function findAverage(cb){
     {$group: {_id: "$id", avgRT: {$avg: "$responseTime"}}}
   ]).toArray(function(err, docs){
     docs.forEach(function(server){
-      serverIndex[server._id]= {id: server._id, average: server.avgRT};
+      serverIndex[server._id]= {id: server._id, average: server.avgRT*1000};
     })
     cb(serverIndex);
   })
+}
 
+function getServers(cb){
+  collection.distinct("name", function(err, docs){
+    cb(docs);
+  })
+}
+
+function getLast(cb){
+  collection.find().limit(3).toArray(function(err,docs){
+    cb(docs);
+  })
 }
 
 io.on("connection", function (socket) {
   var average = [];
+  var body = [];
   setInterval(function () {
       findAverage(function(results){
         average = results;
       });
+      getLast(function(results){
+        // console.log(results);
+        body = results;
+      })
       socket.emit("servers", {
-        body: [{name: 'WOPR', id: 1776}, {name: 'HAL', id: 2010}, {name: 'R2D2', id: 1977}],
+        body: body,
         average: average
       })
-    // })
   }, 500)
 })
 
 
 
 app.get('/api/servers', function (req, res) {
-  wr((error,data)=>{
-    res.json(data.data)
+  getLast(function(results){
+    // console.log(results);
+    res.json(results);
   })
 })
 

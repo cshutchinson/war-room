@@ -1,8 +1,8 @@
 <div class="row">
-  <div ng-repeat="server in servers" class="col-sm-6 col-md-4" ui-sref="detail({id: server.id})">
-        <h3 ng-style="server.responseTime*1000<=50 ? {color: 'green'}: server.responseTime*1000<=500 ?
-        {color: 'yellow'} : {color:'red'}">{{server.name}}</h3>
-        <p>{{server.responseTime * 1000}} ms</p>
-        <p>Average Response Time: {{averages[server.id].average}}</p>
+  <div ng-repeat="bod in body" class="col-sm-6 col-md-4" ui-sref="detail({id: bod.id})">
+        <h3 ng-style="bod.responseTime*1000<=50 ? {color: 'green'}: bod.responseTime*1000<=500 ?
+        {color: 'yellow'} : {color:'red'}">{{bod.name}}({{bod.id}})</h3>
+        <p>{{bod.responseTime * 1000}} ms</p>
+        <p>Average Response Time: {{average[bod.id].average}}</p>
   </div>
 </div>

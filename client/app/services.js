@@ -24,15 +24,18 @@ function TimeService ($stateParams) {
   var socket = io()
   var callbacks = []
   socket.on('servers', function (data) {
+    var average, body;
+    body = data.body;
+    // console.log('body', data);
     callbacks.forEach(function (callback) {
-      var average, averages;
       data.body.forEach(function (server, index) {
         if (server.id == $stateParams.id) {
-          console.log('service data', data);
-          average = data.average[server.id].average
+          average = data.average[server.id].average;
         }
       })
-      callback({average: average})
+      callback({
+        average: average,
+        body: body})
     })
   })
 
